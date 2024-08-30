@@ -79,12 +79,6 @@ describe('MovieService (e2e)', () => {
     return loginReq.body.access_token;
   };
 
-  const createSession = async (movie: Movie, date: string, timeSlot: string, roomNumber: number): Promise<Session> => {
-    const session = await sessionRepository.save({ movie, date, timeSlot, roomNumber });
-    expect(session).toHaveProperty('id');
-    return session;
-  };
-
   const createMovie = async (name: string, ageRestriction: number, sessions?: any): Promise<Movie> => {
     const createMovieDto: CreateMovieDto = { name, ageRestriction, sessions };
     const movieResponse = await request(app.getHttpServer())
