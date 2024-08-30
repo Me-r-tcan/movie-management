@@ -6,6 +6,7 @@ import { ConfigModule } from '@nestjs/config';
 import { dataSourceOptions } from "./db/ormconfig";
 import { MovieModule } from './movie/movie.module';
 import { SessionModule } from './session/session.module';
+import { TicketModule } from './ticket/ticket.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { SessionModule } from './session/session.module';
     AuthModule,
     MovieModule,
     SessionModule,
+    TicketModule,
   ],
 })
 export class AppModule {}
