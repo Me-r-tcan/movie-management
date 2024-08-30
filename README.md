@@ -47,7 +47,12 @@ $ npm run start:prod
 
 ## Run tests
 
+
+
 ```bash
+# change enviroment
+$ set NODE_ENV=test
+
 # unit tests
 $ npm run test
 

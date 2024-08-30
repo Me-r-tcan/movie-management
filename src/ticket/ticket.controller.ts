@@ -14,7 +14,7 @@ export class TicketController {
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(UserRole.CUSTOMER)
-  @Post('buy/:sessionId')
+  @Post('/:sessionId/buy')
   @ApiOperation({ summary: 'Create a new ticket' })
   @ApiResponse({ status: 201, description: 'The ticket has been successfully created.' })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
