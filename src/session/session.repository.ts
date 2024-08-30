@@ -15,6 +15,13 @@ export class SessionRepository extends Repository<Session> {
     });
   }
 
+  async findSessionWithMovieWithWatchedBy(sessionId: number): Promise<Session | null> {
+    return this.findOne({
+      where: { id: sessionId },
+      relations: ['movie', 'watchedBy'],
+    });
+  }
+
   async findSessionsByMovie(movieId: number): Promise<Session[]> {
     return this.find({
       where: { movie: { id: movieId } },

@@ -14,7 +14,7 @@ export class SessionService {
 
   async watchSession(userId: number, sessionId: number): Promise<void> {
     const user = await this.userRepository.findById(userId);
-    const session = await this.sessionRepository.findSessionWithMovie(sessionId);
+    const session = await this.sessionRepository.findSessionWithMovieWithWatchedBy(sessionId);
 
     if (!session) {
       throw new NotFoundException(`Session with ID ${sessionId} not found`);

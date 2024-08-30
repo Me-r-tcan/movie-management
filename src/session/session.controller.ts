@@ -19,7 +19,7 @@ export class SessionController {
   @ApiResponse({ status: 200, description: 'Session successfully marked as watched.' })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
   async watchSession(@Param('sessionId') sessionId: number, @Request() req) {
-    const userId = req.user.id;
+    const userId = req.user.userId;
     await this.sessionService.watchSession(userId, sessionId);
     return { message: 'Session successfully marked as watched.' };
   }
@@ -31,7 +31,7 @@ export class SessionController {
   @ApiResponse({ status: 200, description: 'List of watched sessions.' })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
   async getUserWatchHistory(@Request() req) {
-    const userId = req.user.id;
+    const userId = req.user.userId;
     const watchHistory = await this.sessionService.getUserWatchHistory(userId);
     return watchHistory;
   }
