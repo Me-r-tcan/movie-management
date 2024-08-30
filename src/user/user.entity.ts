@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToMany } from 'typeorm';
 import { Ticket } from '../ticket/ticket.entity';
+import { Session } from '../session/session.entity';
 
 export enum UserRole {
   MANAGER = 'manager',
@@ -25,4 +26,7 @@ export class User {
 
   @OneToMany(() => Ticket, (ticket) => ticket.user)
   tickets: Ticket[];
+
+  @ManyToMany(() => Session, session => session.watchedBy)
+  watchedSessions: Session[];
 }

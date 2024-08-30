@@ -14,4 +14,11 @@ export class SessionRepository extends Repository<Session> {
       relations: ['movie'],
     });
   }
+
+  async findSessionsByMovie(movieId: number): Promise<Session[]> {
+    return this.find({
+      where: { movie: { id: movieId } },
+      relations: ['movie'],
+    });
+  }
 }

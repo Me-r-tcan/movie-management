@@ -1,6 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, ManyToMany, JoinTable } from 'typeorm';
 import { Movie } from '../movie/movie.entity';
 import { Ticket } from '../ticket/ticket.entity';
+import { User } from '../user/user.entity';
 
 @Entity()
 export class Session {
@@ -21,4 +22,8 @@ export class Session {
 
   @OneToMany(() => Ticket, (ticket) => ticket.session)
   tickets: Ticket[];
+
+  @ManyToMany(() => User, user => user.watchedSessions)
+  @JoinTable()
+  watchedBy: User[];
 }

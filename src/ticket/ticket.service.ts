@@ -32,4 +32,16 @@ export class TicketService {
 
     return this.ticketRepository.createTicket(dbUser, session);
   }
+
+  async canWatch(userId: number, sessionId: number): Promise<boolean> {
+    const ticket = await this.ticketRepository.findOne({
+      where: { user: { id: userId }, session: { id: sessionId } },
+    });
+
+    if (!ticket) {
+      return false;
+    }
+
+    return true;
+  }
 }
