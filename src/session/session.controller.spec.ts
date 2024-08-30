@@ -30,16 +30,16 @@ describe('SessionController', () => {
 
   describe('watchSession', () => {
     it('should call sessionService.watchSession with correct parameters', async () => {
-      const req = { user: { id: 1 } };
+      const req = { user: { userId: 1 } };
       const sessionId = 1;
 
       await sessionController.watchSession(sessionId, req);
 
-      expect(sessionService.watchSession).toHaveBeenCalledWith(req.user.id, sessionId);
+      expect(sessionService.watchSession).toHaveBeenCalledWith(req.user.userId, sessionId);
     });
 
     it('should return success message when watchSession is called', async () => {
-      const req = { user: { id: 1 } };
+      const req = { user: { userId: 1 } };
       const sessionId = 1;
 
       const result = await sessionController.watchSession(sessionId, req);
@@ -58,15 +58,15 @@ describe('SessionController', () => {
 
   describe('getUserWatchHistory', () => {
     it('should call sessionService.getUserWatchHistory with correct parameters', async () => {
-      const req = { user: { id: 1 } };
+      const req = { user: { userId: 1 } };
 
       await sessionController.getUserWatchHistory(req);
 
-      expect(sessionService.getUserWatchHistory).toHaveBeenCalledWith(req.user.id);
+      expect(sessionService.getUserWatchHistory).toHaveBeenCalledWith(req.user.userId);
     });
 
     it('should return user watch history', async () => {
-      const req = { user: { id: 1 } };
+      const req = { user: { userId: 1 } };
       const mockWatchHistory = [{ id: 1 }, { id: 2 }];
       sessionService.getUserWatchHistory.mockResolvedValue(mockWatchHistory);
 

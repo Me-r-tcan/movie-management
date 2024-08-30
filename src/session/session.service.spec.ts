@@ -15,7 +15,7 @@ describe('SessionService', () => {
 
   beforeEach(async () => {
     sessionRepository = {
-      findSessionWithMovie: jest.fn(),
+      findSessionWithMovieWithWatchedBy: jest.fn(),
       save: jest.fn(),
     };
     userRepository = {
@@ -40,20 +40,20 @@ describe('SessionService', () => {
 
   describe('watchSession', () => {
     it('should throw NotFoundException if session does not exist', async () => {
-      sessionRepository.findSessionWithMovie.mockResolvedValue(null);
+      sessionRepository.findSessionWithMovieWithWatchedBy.mockResolvedValue(null);
 
       await expect(sessionService.watchSession(1, 1)).rejects.toThrow(NotFoundException);
-      expect(sessionRepository.findSessionWithMovie).toHaveBeenCalledWith(1);
+      expect(sessionRepository.findSessionWithMovieWithWatchedBy).toHaveBeenCalledWith(1);
     });
 
     it('should throw NotFoundException if session has no associated movie', async () => {
-      sessionRepository.findSessionWithMovie.mockResolvedValue({ movie: null });
+      sessionRepository.findSessionWithMovieWithWatchedBy.mockResolvedValue({ movie: null });
 
       await expect(sessionService.watchSession(1, 1)).rejects.toThrow(NotFoundException);
     });
 
     it('should throw ForbiddenException if user does not have a valid ticket', async () => {
-      sessionRepository.findSessionWithMovie.mockResolvedValue({ movie: {} });
+      sessionRepository.findSessionWithMovieWithWatchedBy.mockResolvedValue({ movie: {} });
       userRepository.findById.mockResolvedValue({});
       ticketService.canWatch.mockResolvedValue(false);
 
@@ -64,7 +64,7 @@ describe('SessionService', () => {
       const mockUser = { id: 1 };
       const mockSession = { movie: {}, watchedBy: [mockUser] };
 
-      sessionRepository.findSessionWithMovie.mockResolvedValue(mockSession);
+      sessionRepository.findSessionWithMovieWithWatchedBy.mockResolvedValue(mockSession);
       userRepository.findById.mockResolvedValue(mockUser);
       ticketService.canWatch.mockResolvedValue(true);
 
@@ -75,7 +75,7 @@ describe('SessionService', () => {
       const mockUser = { id: 1 };
       const mockSession = { movie: {}, watchedBy: [] };
 
-      sessionRepository.findSessionWithMovie.mockResolvedValue(mockSession);
+      sessionRepository.findSessionWithMovieWithWatchedBy.mockResolvedValue(mockSession);
       userRepository.findById.mockResolvedValue(mockUser);
       ticketService.canWatch.mockResolvedValue(true);
 
